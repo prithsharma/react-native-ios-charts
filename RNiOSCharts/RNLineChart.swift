@@ -12,11 +12,12 @@ import SwiftyJSON
 
 
 @objc(RNLineChart)
-class RNLineChart : LineChartView {
+class RNLineChart : LineChartView, ChartViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame);
         self.frame = frame;
+        self.delegate = self;
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,5 +49,14 @@ class RNLineChart : LineChartView {
         if json["leftAxis"]["startAtZero"].exists() {
             self.leftAxis.startAtZeroEnabled = json["leftAxis"]["startAtZero"].boolValue;
         }
+    }
+
+    // MARK: ChartViewDelagate
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        NSLog("selection works.");
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("unselection works too.");
     }
 }
