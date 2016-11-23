@@ -13,7 +13,8 @@ import SwiftyJSON
 
 @objc(RNLineChart)
 class RNLineChart : LineChartView, ChartViewDelegate {
-    
+    var selectCallback : RCTBubblingEventBlock?
+
     override init(frame: CGRect) {
         super.init(frame: frame);
         self.frame = frame;
@@ -51,18 +52,20 @@ class RNLineChart : LineChartView, ChartViewDelegate {
         }
     }
 
-    func setOnSelect(_ onSelect: RCTBubblingEventBlock) {
-        // this method is called as expected
+    func setOnSelect(_ onSelect: @escaping RCTBubblingEventBlock) {
+        selectCallback = onSelect;
     }
 
     // MARK: ChartViewDelagate
-    func chartValueSelected(_ chartView: RNLineChart, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        NSLog("selection works.");
-        // chartView.onSelect is not available here
-        // with the error "Value of type RNLineChart has no member 'onSelect'"
+    func chartValueSelected(_ chartView: BarLineChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        NSLog("chart element selected");
+        if (selectCallback == nil) {
+            return;
+        }
+        selectCallback!(["key1": "value1"]);
     }
 
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        NSLog("unselection works too.");
+        NSLog("unselection works");
     }
 }
