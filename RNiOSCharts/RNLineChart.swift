@@ -62,7 +62,10 @@ class RNLineChart : LineChartView, ChartViewDelegate {
         if (selectCallback == nil) {
             return;
         }
-        selectCallback!(["key1": "value1"]);
+        selectCallback!([
+          "xIndex": entry.xIndex,
+          "yValue": entry.value
+        ]);
     }
 
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
