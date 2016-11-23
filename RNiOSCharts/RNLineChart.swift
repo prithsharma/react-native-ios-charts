@@ -69,6 +69,12 @@ class RNLineChart : LineChartView, ChartViewDelegate {
     }
 
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        NSLog("unselection works");
+        NSLog("chart element unselected");
+        if (selectCallback == nil) {
+          return;
+        }
+        selectCallback!([
+          "xIndex": -1,
+        ]);
     }
 }
