@@ -12,6 +12,7 @@
 @interface RCT_EXTERN_MODULE(RNLineChartSwift, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(config, NSString);
+RCT_EXPORT_VIEW_PROPERTY(onSelect, RCTBubblingEventBlock);
 RCT_EXTERN_METHOD(setVisibleXRangeMaximum:(nonnull NSNumber *)reactTag value:(CGFloat *)v);
 
 @end
