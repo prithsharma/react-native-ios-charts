@@ -30,7 +30,8 @@ BubbleChart.propTypes = {
       })).isRequired,
       highlightCircleWidth: React.PropTypes.number
     }))
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default BubbleChart;

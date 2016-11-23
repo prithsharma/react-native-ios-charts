@@ -38,7 +38,8 @@ RadarChart.propTypes = {
     webAlpha: React.PropTypes.number,
     drawWeb: React.PropTypes.bool,
     skipWebLineCount: React.PropTypes.number
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default RadarChart;
