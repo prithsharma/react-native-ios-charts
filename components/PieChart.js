@@ -43,7 +43,8 @@ PieChart.propTypes = {
     usePercentValuesEnabled: React.PropTypes.bool,
     centerTextRadiusPercent: React.PropTypes.number,
     maxAngle: React.PropTypes.number
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default PieChart;

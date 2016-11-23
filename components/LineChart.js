@@ -56,7 +56,8 @@ LineChart.propTypes = {
       lineDashPhase: React.PropTypes.number,
       lineWidth: React.PropTypes.number
     }))
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default LineChart;

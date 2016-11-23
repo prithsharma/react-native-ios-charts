@@ -47,7 +47,8 @@ ScatterChart.propTypes = {
         'X'
       ])
     }))
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default ScatterChart;
