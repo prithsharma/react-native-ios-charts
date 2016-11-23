@@ -51,11 +51,17 @@ class RNLineChart : LineChartView, ChartViewDelegate {
         }
     }
 
-    // MARK: ChartViewDelagate
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        NSLog("selection works.");
+    func setOnSelect(_ onSelect: RCTBubblingEventBlock) {
+        // this method is called as expected
     }
-    
+
+    // MARK: ChartViewDelagate
+    func chartValueSelected(_ chartView: RNLineChart, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        NSLog("selection works.");
+        // chartView.onSelect is not available here
+        // with the error "Value of type RNLineChart has no member 'onSelect'"
+    }
+
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
         NSLog("unselection works too.");
     }
