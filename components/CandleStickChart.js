@@ -52,7 +52,8 @@ CandleStickChart.propTypes = {
       increasingFilled: React.PropTypes.bool,
       decreasingFilled: React.PropTypes.bool
     }))
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default CandleStickChart;
