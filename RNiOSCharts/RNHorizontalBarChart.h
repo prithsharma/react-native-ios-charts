@@ -11,5 +11,6 @@
 @interface RNHorizontalBarChart : RCTView
 
 @property (nonatomic, assign) NSString *config;
+@property (nonatomic, copy) RCTBubblingEventBlock onSelect;
 
 @end

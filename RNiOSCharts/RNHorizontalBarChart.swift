@@ -10,11 +10,13 @@ import Charts
 import SwiftyJSON
 
 @objc(RNHorizontalBarChart)
-class RNHorizontalBarChart : HorizontalBarChartView {
-    
+class RNHorizontalBarChart : HorizontalBarChartView, ChartViewDelegate {
+    var selectCallback : RCTBubblingEventBlock?
+
     override init(frame: CGRect) {
         super.init(frame: frame);
         self.frame = frame;
+        self.delegate = self;
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -205,7 +207,31 @@ class RNHorizontalBarChart : HorizontalBarChartView {
         if json["drawBarShadow"].exists() {
             self.drawBarShadowEnabled = json["drawBarShadow"].boolValue;
         }
-        
     }
-    
+
+    func setOnSelect(_ onSelect: @escaping RCTBubblingEventBlock) {
+        selectCallback = onSelect;
+    }
+
+    // MARK: ChartViewDelagate
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        NSLog("chart element selected");
+        if (selectCallback == nil) {
+            return;
+        }
+        selectCallback!([
+          "xIndex": entry.xIndex,
+          "yValue": entry.value
+        ]);
+    }
+
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("chart element unselected");
+        if (selectCallback == nil) {
+          return;
+        }
+        selectCallback!([
+          "xIndex": -1,
+        ]);
+    }
 }
