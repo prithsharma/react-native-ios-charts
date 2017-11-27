@@ -12,11 +12,13 @@ import SwiftyJSON
 
 
 @objc(RNLineChart)
-class RNLineChart : LineChartView {
-    
+class RNLineChart : LineChartView, ChartViewDelegate {
+    var selectCallback : RCTBubblingEventBlock?
+
     override init(frame: CGRect) {
         super.init(frame: frame);
         self.frame = frame;
+        self.delegate = self;
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,5 +50,31 @@ class RNLineChart : LineChartView {
         if json["leftAxis"]["startAtZero"].exists() {
             self.leftAxis.startAtZeroEnabled = json["leftAxis"]["startAtZero"].boolValue;
         }
+    }
+
+    func setOnSelect(_ onSelect: @escaping RCTBubblingEventBlock) {
+        selectCallback = onSelect;
+    }
+
+    // MARK: ChartViewDelagate
+    func chartValueSelected(_ chartView: BarLineChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        NSLog("chart element selected");
+        if (selectCallback == nil) {
+            return;
+        }
+        selectCallback!([
+          "xIndex": entry.xIndex,
+          "yValue": entry.value
+        ]);
+    }
+
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        NSLog("chart element unselected");
+        if (selectCallback == nil) {
+          return;
+        }
+        selectCallback!([
+          "xIndex": -1,
+        ]);
     }
 }

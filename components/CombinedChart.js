@@ -108,7 +108,8 @@ CombinedChart.propTypes = {
     drawValueAboveBar: React.PropTypes.bool,
     drawHighlightArrow: React.PropTypes.bool,
     drawBarShadow: React.PropTypes.bool,
-  })
+  }),
+  onSelect: React.PropTypes.func,
 };
 
 export default CombinedChart;
